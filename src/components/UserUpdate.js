@@ -194,7 +194,6 @@ const GroupControls = styled.div`
     box-shadow: none;
     margin-bottom: 10px;
     border-radius: 20px;
-    padding: 10px;
     font-size: 17px;
   }
 `;

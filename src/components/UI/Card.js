@@ -6,10 +6,10 @@ const Card = (props) => {
 };
 
 const Wrapper = styled.div`
-  margin: 20px auto 20px auto;
+  margin: 20px auto;
   background-color: white;
   border: 2px solid rgb(0, 0, 0, 4);
-  width: 70%;
+  width:100%;
   max-width: 40rem;
   border-radius: 10px;
   padding: calc(3.5vw + 5px);
