@@ -80,7 +80,7 @@ export async function updateUser(requestData) {
 }
 
 export async function deleteUser(userId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${userId}.json`, {
+  const response = await fetch(`${FIREBASE_DOMAIN}/users/${userId}.json`, {
     method: "DELETE",
   });
 

@@ -7,11 +7,16 @@ import LoadingSpinner from "./UI/LoadingSpinner";
 import { updateUser } from "../lib/api";
 import { useEffect } from "react";
 
-const UserUpdate = ({id,name,lastName,address,dateOfBirth,finishSubmittingForm}) => {
+const UserUpdate = ({
+  id,
+  name,
+  lastName,
+  address,
+  dateOfBirth,
+  finishSubmittingForm,
+}) => {
+  console.log(id, name, lastName, address, dateOfBirth);
 
-    console.log(id,name,lastName,address,dateOfBirth);
-
-    
   const validateValue = (value) => {
     return value.trim() !== "" && value.trim().length < 30;
   };
@@ -73,9 +78,9 @@ const UserUpdate = ({id,name,lastName,address,dateOfBirth,finishSubmittingForm})
     };
 
     const userData = {
-        userData: user,
-        userId: id
-    }
+      userData: user,
+      userId: id,
+    };
 
     sendRequest(userData);
 
@@ -85,7 +90,6 @@ const UserUpdate = ({id,name,lastName,address,dateOfBirth,finishSubmittingForm})
     resetInputAddress();
   };
 
-  
   useEffect(() => {
     if (status === "completed" && !error) {
       finishSubmittingForm();
@@ -136,7 +140,7 @@ const UserUpdate = ({id,name,lastName,address,dateOfBirth,finishSubmittingForm})
         {dateOfBirthHasError && <p className="error">{errorMessage}</p>}
         <GroupControls>
           <label htmlFor="address">Address</label>
-          <input 
+          <input
             value={addressValue}
             type="text"
             onChange={setInputAddress}
@@ -146,20 +150,29 @@ const UserUpdate = ({id,name,lastName,address,dateOfBirth,finishSubmittingForm})
           />
         </GroupControls>
         {addressHasError && <p className="error">{errorMessage}</p>}
-        {status === "pending" && <LoadingSpinner />}
-        <GroupActions disabled={!formIsValid} type="submit">
-          Update{" "}
-        </GroupActions>
+        {status === "pending" ? (
+          <LoadingSpinner />
+        ) : (
+          <GroupActions disabled={!formIsValid} type="submit">
+            Update{" "}
+          </GroupActions>
+        )}
       </Form>
     </Card>
   );
 };
+
 
 const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  background-color: rgb(0,0,0);
+  padding: 20px;
+  border-radius: 10px;
+  color: white;
 `;
 
 const GroupControls = styled.div`
@@ -192,6 +205,7 @@ const GroupActions = styled.button`
   border: 1px solid transparent;
   letter-spacing: 1.5px;
   font-size: 17px;
+  margin-top: 10px;
 
   &:hover {
     background-color: rgb(200, 200, 200, 0.8);

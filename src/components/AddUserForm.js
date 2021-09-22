@@ -6,8 +6,7 @@ import useHttp from "../hooks/use-http";
 import LoadingSpinner from "./UI/LoadingSpinner";
 import { useHistory } from "react-router";
 
-
-const AddUserForm = ({onAddUser,isLoading}) => {
+const AddUserForm = ({ onAddUser, isLoading }) => {
   const history = useHistory();
   const validateValue = (value) => {
     return value.trim() !== "" && value.trim().length < 30;
@@ -55,8 +54,6 @@ const AddUserForm = ({onAddUser,isLoading}) => {
     formIsValid = true;
   }
 
-  
-
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -77,7 +74,6 @@ const AddUserForm = ({onAddUser,isLoading}) => {
     resetInputAddress();
   };
 
-  
   const errorMessage =
     "The value should not be empty and the number of chars should be less than 30";
 
@@ -124,10 +120,13 @@ const AddUserForm = ({onAddUser,isLoading}) => {
           />
         </GroupControls>
         {addressHasError && <p className="error">{errorMessage}</p>}
-        {isLoading && <LoadingSpinner />}
-        <GroupActions disabled={!formIsValid} type="submit">
-          Add{" "}
-        </GroupActions>
+        {isLoading ? (
+          <LoadingSpinner />
+        ) : (
+          <GroupActions disabled={!formIsValid} type="submit">
+            Add{" "}
+          </GroupActions>
+        )}
       </Form>
     </Card>
   );
@@ -170,6 +169,7 @@ const GroupActions = styled.button`
   border: 1px solid transparent;
   letter-spacing: 1.5px;
   font-size: 17px;
+  margin-top: 10px;
 
   &:hover {
     background-color: rgb(200, 200, 200, 0.8);

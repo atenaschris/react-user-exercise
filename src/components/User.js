@@ -8,10 +8,10 @@ const User = (props) => {
   return (
     <Card>
       <Wrapper>
-        <h1>{name}</h1>
-        <span>{userName}</span>
-        <p>{dateOfBirth}</p>
-        <p>{address}</p>
+        <h1>Name:{name}</h1>
+        <p>UserName:{userName}</p>
+        <p>DateOfBirth:{dateOfBirth}</p>
+        <p>Address:{address}</p>
         <Link to={`/detail/${id}`} className="btn">
           View Fullscreen
         </Link>
@@ -24,6 +24,8 @@ const Wrapper = styled.li`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  flex-direction: column ;
+ 
 
   a {
     text-decoration: none;
