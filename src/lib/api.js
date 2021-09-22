@@ -60,7 +60,7 @@ export async function addUser(userData) {
 
 export async function updateUser(requestData) {
   const response = await fetch(
-    `${FIREBASE_DOMAIN}/quotes/${requestData.userId}.json`,
+    `${FIREBASE_DOMAIN}/users/${requestData.userId}.json`,
     {
       method: "PUT",
       body: JSON.stringify(requestData.userData),
