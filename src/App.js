@@ -5,6 +5,7 @@ import DetailPage from "./pages/DetailPage";
 import Layout from "./components/UI/Layout";
 
 import Welcome from "./pages/Welcome";
+import NewUser from './pages/NewUser';
 
 function App() {
   return (
@@ -15,6 +16,9 @@ function App() {
         </Route>
         <Route path="/detail/:userId">
           <DetailPage/>
+        </Route>
+        <Route path="/new-user">
+          <NewUser/>
         </Route>
       </Switch>
     </Layout>

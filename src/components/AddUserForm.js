@@ -4,9 +4,11 @@ import useInput from "../hooks/use-input";
 import { addUser } from "../lib/api";
 import useHttp from "../hooks/use-http";
 import LoadingSpinner from "./UI/LoadingSpinner";
+import { useHistory } from "react-router";
 
 
-const AddUserForm = () => {
+const AddUserForm = ({onAddUser,isLoading}) => {
+  const history = useHistory();
   const validateValue = (value) => {
     return value.trim() !== "" && value.trim().length < 30;
   };
@@ -53,7 +55,7 @@ const AddUserForm = () => {
     formIsValid = true;
   }
 
-  const { sendRequest, status,error } = useHttp(addUser);
+  
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -67,7 +69,7 @@ const AddUserForm = () => {
       address: addressValue,
     };
 
-    sendRequest(user);
+    onAddUser(user);
 
     resetInputName();
     resetInputLastName();
@@ -122,7 +124,7 @@ const AddUserForm = () => {
           />
         </GroupControls>
         {addressHasError && <p className="error">{errorMessage}</p>}
-        {status === "pending" && <LoadingSpinner />}
+        {isLoading && <LoadingSpinner />}
         <GroupActions disabled={!formIsValid} type="submit">
           Add{" "}
         </GroupActions>

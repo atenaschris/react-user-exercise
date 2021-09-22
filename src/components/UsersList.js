@@ -18,7 +18,11 @@ const UsersList = () => {
   }, [sendRequest]);
 
   if (status === "pending") {
-    return <LoadingSpinner />;
+    return (
+      <div style={{marginTop:"20px"}}>
+        <LoadingSpinner />
+      </div>
+    );
   }
   if (error) {
     return <p>{error}</p>;
