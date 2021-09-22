@@ -1,5 +1,6 @@
 import "./App.css";
 import { Switch, Route } from "react-router";
+import DetailPage from "./pages/DetailPage";
 
 import Layout from "./components/UI/Layout";
 
@@ -11,6 +12,9 @@ function App() {
       <Switch>
         <Route path="/" exact>
           <Welcome/>
+        </Route>
+        <Route path="/detail/:userId">
+          <DetailPage/>
         </Route>
       </Switch>
     </Layout>

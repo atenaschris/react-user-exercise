@@ -22,13 +22,14 @@ export async function getAllUsers() {
   return transformedUsers;
 }
 
+
 export async function getSingleUser(userId) {
-  const response = await fetch(`${FIREBASE_DOMAIN}/quotes/${userId}.json`);
+  const response = await fetch(`${FIREBASE_DOMAIN}/users/${userId}.json`);
 
   const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Could not fetch user.");
+    throw new Error(data.message || "Could not fetch quote.");
   }
 
   const loadedUser = {

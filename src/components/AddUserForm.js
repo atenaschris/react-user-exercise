@@ -5,6 +5,7 @@ import { addUser } from "../lib/api";
 import useHttp from "../hooks/use-http";
 import LoadingSpinner from "./UI/LoadingSpinner";
 
+
 const AddUserForm = () => {
   const validateValue = (value) => {
     return value.trim() !== "" && value.trim().length < 30;
@@ -52,7 +53,7 @@ const AddUserForm = () => {
     formIsValid = true;
   }
 
-  const { sendRequest, status } = useHttp(addUser);
+  const { sendRequest, status,error } = useHttp(addUser);
 
   const submitHandler = (event) => {
     event.preventDefault();
@@ -74,6 +75,7 @@ const AddUserForm = () => {
     resetInputAddress();
   };
 
+  
   const errorMessage =
     "The value should not be empty and the number of chars should be less than 30";
 
@@ -120,7 +122,7 @@ const AddUserForm = () => {
           />
         </GroupControls>
         {addressHasError && <p className="error">{errorMessage}</p>}
-        {status ==='pending' && <LoadingSpinner/> }
+        {status === "pending" && <LoadingSpinner />}
         <GroupActions disabled={!formIsValid} type="submit">
           Add{" "}
         </GroupActions>

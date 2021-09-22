@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
-
+import styled from "styled-components";
 import useHttp from "../hooks/use-http";
 import { getAllUsers } from "../lib/api";
 import User from "../components/User";
 import LoadingSpinner from "./UI/LoadingSpinner";
 
-const {
-  sendRequest,
-  error,
-  status,
-  data: loadedQuotes,
-} = useHttp(getAllUsers, true);
-
-useEffect(() => {
-  sendRequest();
-}, [sendRequest]);
-
 const UsersList = () => {
+  const {
+    sendRequest,
+    error,
+    status,
+    data: loadedUsers,
+  } = useHttp(getAllUsers, true);
+
+  useEffect(() => {
+    sendRequest();
+  }, [sendRequest]);
+
   if (status === "pending") {
     return <LoadingSpinner />;
   }
@@ -24,17 +24,18 @@ const UsersList = () => {
     return <p>{error}</p>;
   }
 
-  if (status === "completed" && (!loadedQuotes || loadedQuotes.length === 0)) {
-    return <p>No quotes found!!!</p>;
+  if (status === "completed" && (!loadedUsers || loadedUsers.length === 0)) {
+    return <p className="error">No users found!!! Start adding new users</p>;
   }
 
   return (
     <List>
-      {loadedQuotes.map((user, i) => (
+      {loadedUsers.map((user, i) => (
         <User
+          id={user.id}
           key={i}
           name={user.name}
-          userName={user.username}
+          userName={user.lastName}
           dateOfBirth={user.dateOfBirth}
           address={user.address}
         />
@@ -42,5 +43,11 @@ const UsersList = () => {
     </List>
   );
 };
+
+const List = styled.ul`
+  width: 100%;
+  list-style: none;
+  padding: 0;
+`;
 
 export default UsersList;
