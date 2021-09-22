@@ -1,6 +1,9 @@
 import styled from "styled-components";
 import Card from "./UI/Card";
 import useInput from "../hooks/use-input";
+import { addUser } from "../lib/api";
+import useHttp from "../hooks/use-http";
+import LoadingSpinner from "./UI/LoadingSpinner";
 
 const AddUserForm = () => {
   const validateValue = (value) => {
@@ -49,6 +52,8 @@ const AddUserForm = () => {
     formIsValid = true;
   }
 
+  const { sendRequest, status } = useHttp(addUser);
+
   const submitHandler = (event) => {
     event.preventDefault();
 
@@ -61,9 +66,7 @@ const AddUserForm = () => {
       address: addressValue,
     };
 
-    console.log(user);
-
-    
+    sendRequest(user);
 
     resetInputName();
     resetInputLastName();
@@ -117,6 +120,7 @@ const AddUserForm = () => {
           />
         </GroupControls>
         {addressHasError && <p className="error">{errorMessage}</p>}
+        {status ==='pending' && <LoadingSpinner/> }
         <GroupActions disabled={!formIsValid} type="submit">
           Add{" "}
         </GroupActions>

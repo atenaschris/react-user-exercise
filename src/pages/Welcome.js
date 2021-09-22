@@ -6,6 +6,7 @@ const Welcome = () => {
   return (
     <>
       <AddUserForm />
+      <UsersList/>
     </>
   );
 };
